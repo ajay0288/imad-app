@@ -13,7 +13,7 @@ button.onclick=function(){
             }
         }
     };
-    request.open('GET', 'http://aajay0288.imad.hasura-app.io/counter',true);
+    request.open('GET','http://aajay0288.imad.hasura-app.io/counter',true);
     request.sent(null);
 };
 
