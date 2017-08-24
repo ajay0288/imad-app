@@ -5,6 +5,35 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var Pool=require('pg').Pool;
+
+var config={
+    user:'aajay0288',
+    database:'aajay0288',
+    host:'db.imad.hasura-app.io',
+    port:'5432',
+    password:process.env.DB_PASSWORD
+    
+}
+
+var pool=new Pool(config);
+
+app.get('/test-db',function(req,res)
+{
+    Pool.query('select * from test',function(err,result)
+    {
+        if(err)
+        {
+            res.status(500).send(err.toString());
+        }
+        else
+        {
+            res.send(JSON.stringify(result));
+        }
+    });
+});
+
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
